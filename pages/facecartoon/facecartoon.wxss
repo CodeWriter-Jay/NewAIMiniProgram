@@ -1,0 +1,35 @@
+.btn_box {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100rpx;
+  z-index: 999;
+}
+
+cover-image {
+  width: 100rpx;
+  opacity: .7;
+}
+
+.faceInfo_box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  background-color: rgba(255, 255, 255, .7);
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20rpx;
+}
+
+.face_row{
+  display: flex;
+  justify-content: space-around;
+  font-size: 28rpx;
+}

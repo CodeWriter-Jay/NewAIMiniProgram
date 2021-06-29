@@ -1,0 +1,14 @@
+<camera wx:if="{{!isShowPic}}" device-position="{{devicePosition?'front':'back'}}" flash="off" binderror="error"
+  style="width: 100%; height: {{screenHeight}}px;">
+  <cover-view class="btn_box">
+    <cover-image src="/src/icons/reverse.png" bindtap="reverseCamera"></cover-image>
+    <cover-image src="/src/icons/camera.png" bindtap="takePhoto"></cover-image>
+    <cover-image src="/src/icons/album.png" bindtap="choosePhoto"></cover-image>
+  </cover-view>
+</camera>
+<view wx:else style="width: 100%; height: {{screenHeight}}px;">
+  <image style="width: 100%; height: 100%;" src="{{imagePath}}"></image>
+  <view class="btn_box">
+    <button type="primary" bindtap="reChoose">重新选择照片</button>
+  </view>
+</view>

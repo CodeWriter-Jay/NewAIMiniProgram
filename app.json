@@ -1,11 +1,10 @@
 {
   "pages": [
     "pages/mainform/mainform",
+    "pages/facecartoon/facecartoon",
     "pages/chatroom/chatroom",
     "pages/ocr/ocr",
-    "pages/madeup/madeup",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/madeup/madeup"
   ],
   "plugins": {
     "WechatSI": {
@@ -22,7 +21,7 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "position":"top",
+    "position": "top",
     "list": [
       {
         "pagePath": "pages/mainform/mainform",
@@ -31,8 +30,9 @@
         "selectedIconPath": "/src/icons/mainform-active.png"
       },
       {
-        "pagePath": "pages/chatroom/chatroom",
-        "text": "小V同学",
+        
+        "pagePath": "pages/facecartoon/facecartoon",
+        "text": "人脸动漫化",
         "iconPath": "/src/icons/android-default.png",
         "selectedIconPath": "/src/icons/android-active.png"
       },

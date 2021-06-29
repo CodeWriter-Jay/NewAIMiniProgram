@@ -2,17 +2,14 @@
 <view class="page__hd">
 	<view class="page__title">一、程序介绍</view>
 	<view class="page__desc">
-		程序名称：易生活系统
-	</view>
-  <view class="page__desc">
-		程序主题：与我聊天，为你拍照，跟它交流
+		程序名称：AI微信小程序
 	</view>
 </view>
 
 <view class="page__hd">
   <view class="page__title">二、功能介绍</view>
 	<view class="page__desc">
-		“外语交流助手”功能、“人脸试妆”功能、“闲聊机器人”功能。
+		“外语交流助手”功能、“人脸试妆”功能、“人脸动漫化”功能。
 	</view>
 </view>
 
@@ -25,6 +22,6 @@
 		张佳酝、尹鹏玉：“人脸试妆”功能；
 	</view>
   <view class="page__desc">
-		张杰：“闲聊机器人”功能及后期各项功能整合。
+		张杰、周诗雨：“人脸动漫化”功能；
 	</view>
 </view>
