@@ -5,27 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabbarList: [{
-      "text": "对话",
-      "iconPath": "/src/icons/android-default.png",
-      "selectedIconPath": "/src/icons/android-active.png",
-    },
-    {
-      "text": "翻译",
-      "iconPath": "/src/icons/translator-default.png",
-      "selectedIconPath": "/src/icons/translator-active.png",
-    },
-    {
-      "text": "人脸试妆",
-      "iconPath": "/src/icons/face-default.png",
-      "selectedIconPath": "/src/icons/face-active.png",
-    }]
-  },
-  tabChange(e) {
-    console.log('tab change', e);
-    wx.switchTab({
-      url: '/pages/chatroom/chatroom',
-    })
+
   },
 
 
