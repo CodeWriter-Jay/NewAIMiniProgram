@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/mainform/mainform",
+    "pages/chatroom/chatroom",
+    "pages/ocr/ocr",
+    "pages/madeup/madeup",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.4",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#D3D3D3",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "position":"top",
+    "list": [
+      {
+        "pagePath": "pages/mainform/mainform",
+        "text": "首页",
+        "iconPath": "/src/icons/mainform-default.png",
+        "selectedIconPath": "/src/icons/mainform-active.png"
+      },
+      {
+        "pagePath": "pages/chatroom/chatroom",
+        "text": "小V同学",
+        "iconPath": "/src/icons/android-default.png",
+        "selectedIconPath": "/src/icons/android-active.png"
+      },
+      {
+        "pagePath": "pages/ocr/ocr",
+        "text": "翻译助手",
+        "iconPath": "/src/icons/translator-default.png",
+        "selectedIconPath": "/src/icons/translator-active.png"
+      },
+      {
+        "pagePath": "pages/madeup/madeup",
+        "text": "人脸试妆",
+        "iconPath": "/src/icons/face-default.png",
+        "selectedIconPath": "/src/icons/face-active.png"
+      }
+    ]
+  }
+}
