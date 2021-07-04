@@ -5,7 +5,8 @@
     <input type="file"  id="file" name="files[]" multiple  />
   </view>
 </view>
-<!-- 口红颜色 -->
+<view bindtap="section"><image src="/src/image/photogirl.png"></image></view>
+<!-- 口红颜色
 <view  class='increased {{aniStyle?"slideup":"slidedown"}}' wx:if="{{increase}}">
     <view class="zhs" bindtap="zhuan">
       <image src="/src/images/zhuanhong.png"></image>
@@ -42,11 +43,11 @@
       <view wx:else>少女粉</view>
       </view>
     </view>
-  </view>
+  </view> -->
 <!-- 拉动选择大小 -->
-<slider wx:if="{{ifShow}}" bindchange="sliderchange" min="{{minValue}}" max="{{maxValue}}"  value="{{showValue0}}" selected-color="#707070" show-value/>
+<!-- <slider wx:if="{{ifShow}}" bindchange="sliderchange" min="{{minValue}}" max="{{maxValue}}"  value="{{showValue0}}" selected-color="#707070" show-value/> -->
 <!-- 选择美颜部分 -->
-<view class="form">  
+<!-- <view class="form">  
 <view class="lowform1" bindtap="smooth">
   <view wx:if="{{taps[0]==1}}">
     <image src="/src/images/grindskin1.png"></image>
@@ -97,4 +98,4 @@
     <view>口红</view>
   </view>
 </view>
-</view>
+</view> -->

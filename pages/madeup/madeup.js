@@ -27,6 +27,7 @@ Page({
     G: 0,
     B: 0,
     A: 0,
+    access_token:''
   },
   chooseImg() {
     var that = this;
@@ -47,39 +48,64 @@ Page({
       }
     })
   },
-  sliderchange: function (e) {
-    var id = this.data.id;
-    var value = e.detail.value;
-    if (id == 1) { this.data.showValue1 = value };
-    if (id == 2) { this.data.showValue2 = value };
-    if (id == 3) { this.data.showValue3 = value };
-    if (id == 4) { this.data.showValue4 = value };
+  // sliderchange: function (e) {
+  //   var id = this.data.id;
+  //   var value = e.detail.value;
+  //   if (id == 1) { this.data.showValue1 = value };
+  //   if (id == 2) { this.data.showValue2 = value };
+  //   if (id == 3) { this.data.showValue3 = value };
+  //   if (id == 4) { this.data.showValue4 = value };
 
+  //   var that = this;
+  //   var smoothValue = that.data.showValue1;
+  //   var whiteValue = that.data.showValue2;
+  //   var thinfaceValue = that.data.showValue3;
+  //   var bigeyeValue = that.data.showValue4;
+  //   var photo = that.data.resultbase;
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/makeup', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       showValue1: smoothValue,
+  //       showValue2: whiteValue,
+  //       showValue3: thinfaceValue,
+  //       showValue4: bigeyeValue,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //         tempbase: res.data.ResultImage,
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
+
+  section:function(){
     var that = this;
-    var smoothValue = that.data.showValue1;
-    var whiteValue = that.data.showValue2;
-    var thinfaceValue = that.data.showValue3;
-    var bigeyeValue = that.data.showValue4;
-    var photo = that.data.resultbase;
-    let url=app.globalData.host;
     wx.request({
-      url: url+'/makeup', //仅为示例，并非真实的接口地址
+      url: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/body_seg?access_token=24.559b1532e187d24f99044bcb80cef931.2592000.1627960373.282335-24490865', //仅为示例，并非真实的接口地址
       data: {
-        showValue1: smoothValue,
-        showValue2: whiteValue,
-        showValue3: thinfaceValue,
-        showValue4: bigeyeValue,
-        avatarbase: photo,
+        image: that.data.avatarbase
       },
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+        console.log(res);
+        var ImgUrl = that.getBase64ImageUrl(res.data.foreground);
         that.setData({
           avatarUrl: ImgUrl,
-          tempbase: res.data.ResultImage,
+          tempbase: res.data.foreground,
         })
       },
       fail: function (err) {//请求成功的回调函数
@@ -87,338 +113,338 @@ Page({
       }
     })
   },
-  smooth: function () {
-    var that = this;
-    var show1 = this.data.showValue1;
-    this.setData({
-      ifShow: true,
-      id: 1,
-      taps: [1, 0, 0, 0, 0],
-      showValue0: show1,
-      increase: false,
-      aniStyle: true,
-    });
-  },
-  white: function () {
-    var that = this;
-    var show2 = this.data.showValue2;
-    this.setData({
-      ifShow: true,
-      id: 2,
-      taps: [0, 2, 0, 0, 0],
-      showValue0: show2,
-      increase: false,
-      aniStyle: true,
-    });
-  },
-  thinface: function () {
-    var that = this;
-    var show3 = this.data.showValue3;
-    this.setData({
-      ifShow: true,
-      id: 3,
-      taps: [0, 0, 3, 0, 0],
-      showValue0: show3,
-      increase: false,
-      aniStyle: true,
-    });
-  },
-  bigeye: function () {
-    var that = this;
-    var show4 = this.data.showValue4;
-    this.setData({
-      ifShow: true,
-      id: 4,
-      taps: [0, 0, 0, 4, 0],
-      showValue0: show4,
-      increase: false,
-      aniStyle: true,
-    });
-  },
-  lips: function () {
-    var that = this;
-    this.setData({
-      taps: [0, 0, 0, 0, 5],
-      ifShow: false,
-      increase: true,
-      aniStyle: true,
-    });
-  },
-  zhuan: function () {
-    var that = this;
-    var photo = this.data.tempbase;
-    var photo2 = this.data.avatarbase;
-    this.setData({
-      tap: [1, 0, 0, 0, 0],
-    })
-    let url=app.globalData.host;
-    wx.request({
-      url: url+'/lipstick', //仅为示例，并非真实的接口地址
-      data: {
-        R: 178,
-        G: 34,
-        B: 34,
-        A: 80,
-        avatarbase: photo,
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-        that.setData({
-          avatarUrl: ImgUrl,
-        });
-        wx.request({
-          url: url+'/lipstick', //仅为示例，并非真实的接口地址
-          data: {
-            R: 178,
-            G: 34,
-            B: 34,
-            A: 80,
-            avatarbase: photo2,
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success(res) {
-            var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-            that.setData({
-              resultbase : res.data.ResultImage,
-            });
-          },
-          fail: function (err) {//请求成功的回调函数
-            console.log(err)
-          }
-        })
-      },
-      fail: function (err) {//请求成功的回调函数
-        console.log(err)
-      }
-    })
-  },
-  xing: function () {
-    var that = this;
-    var photo = this.data.tempbase;
-    var photo2 = this.data.avatarbase;
-    this.setData({
-      tap: [0, 1, 0, 0, 0],
-    });
-    let url=app.globalData.host;
-    wx.request({
-      url: url+'/lipstick', //仅为示例，并非真实的接口地址
-      data: {
-        R: 220,
-        G: 20,
-        B: 60,
-        A: 80,
-        avatarbase: photo,
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-        that.setData({
-          avatarUrl: ImgUrl,
-        });
-        wx.request({
-          url: url+'/lipstick', //仅为示例，并非真实的接口地址
-          data: {
-            R: 220,
-            G: 20,
-            B: 60,
-            A: 80,
-            avatarbase: photo2,
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success(res) {
-            var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-            that.setData({
-              resultbase : res.data.ResultImage,
-            });
-          },
-          fail: function (err) {//请求成功的回调函数
-            console.log(err)
-          }
-        })
-      },
-      fail: function (err) {//请求成功的回调函数
-        console.log(err)
-      }
-    })
-  },
-  niu: function () {
-    var that = this;
-    var photo = this.data.tempbase;
-    var photo2 = this.data.avatarbase;
-    this.setData({
-      tap: [0, 0, 1, 0, 0],
-    });
-    let url=app.globalData.host;
-    wx.request({
-      url: url+'/lipstick', //仅为示例，并非真实的接口地址
-      data: {
-        R: 139,
-        G: 0,
-        B: 0,
-        A: 80,
-        avatarbase: photo,
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-        that.setData({
-          avatarUrl: ImgUrl,
-        });
-        wx.request({
-          url: url+'/lipstick', //仅为示例，并非真实的接口地址
-          data: {
-            R: 139,
-            G: 0,
-            B: 0,
-            A: 80,
-            avatarbase: photo2,
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success(res) {
-            var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-            that.setData({
-              resultbase : res.data.ResultImage,
-            });
-          },
-          fail: function (err) {//请求成功的回调函数
-            console.log(err)
-          }
-        })
-      },
-      fail: function (err) {//请求成功的回调函数
-        console.log(err)
-      }
-    })
-  },
-  zheng: function () {
-    var that = this;
-    var photo = this.data.tempbase;
-    var photo2 = this.data.avatarbase;
-    this.setData({
-      tap: [0, 0, 0, 1, 0],
-    });
-    let url=app.globalData.host;
-    wx.request({
-      url: url+'/lipstick', //仅为示例，并非真实的接口地址
-      data: {
-        R: 255,
-        G: 0,
-        B: 0,
-        A: 80,
-        avatarbase: photo,
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-        that.setData({
-          avatarUrl: ImgUrl,
-        });
-        wx.request({
-          url: url+'/lipstick', //仅为示例，并非真实的接口地址
-          data: {
-            R: 255,
-            G: 0,
-            B: 0,
-            A: 80,
-            avatarbase: photo2,
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success(res) {
-            var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-            that.setData({
-              resultbase : res.data.ResultImage,
-            });
-          },
-          fail: function (err) {//请求成功的回调函数
-            console.log(err)
-          }
-        })
-      },
-      fail: function (err) {//请求成功的回调函数
-        console.log(err)
-      }
-    })
-  },
-  fen: function () {
-    var that = this;
-    var photo = this.data.tempbase;
-    var photo2 = this.data.avatarbase;
-    this.setData({
-      tap: [0, 0, 0, 0, 1],
-    });
-    let url=app.globalData.host;
-    wx.request({
-      url: url+'/lipstick', //仅为示例，并非真实的接口地址
-      data: {
-        R: 255,
-        G: 105,
-        B: 180,
-        A: 80,
-        avatarbase: photo,
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(res) {
-        var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-        that.setData({
-          avatarUrl: ImgUrl,
-        });
-        wx.request({
-          url: url+'/lipstick', //仅为示例，并非真实的接口地址
-          data: {
-            R: 255,
-            G: 105,
-            B: 180,
-            A: 80,
-            avatarbase: photo2,
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success(res) {
-            var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
-            that.setData({
-              resultbase : res.data.ResultImage,
-            });
-          },
-          fail: function (err) {//请求成功的回调函数
-            console.log(err)
-          }
-        })
-      },
-      fail: function (err) {//请求成功的回调函数
-        console.log(err)
-      }
-    })
-  },
+  // smooth: function () {
+  //   var that = this;
+  //   var show1 = this.data.showValue1;
+  //   this.setData({
+  //     ifShow: true,
+  //     id: 1,
+  //     taps: [1, 0, 0, 0, 0],
+  //     showValue0: show1,
+  //     increase: false,
+  //     aniStyle: true,
+  //   });
+  // },
+  // white: function () {
+  //   var that = this;
+  //   var show2 = this.data.showValue2;
+  //   this.setData({
+  //     ifShow: true,
+  //     id: 2,
+  //     taps: [0, 2, 0, 0, 0],
+  //     showValue0: show2,
+  //     increase: false,
+  //     aniStyle: true,
+  //   });
+  // },
+  // thinface: function () {
+  //   var that = this;
+  //   var show3 = this.data.showValue3;
+  //   this.setData({
+  //     ifShow: true,
+  //     id: 3,
+  //     taps: [0, 0, 3, 0, 0],
+  //     showValue0: show3,
+  //     increase: false,
+  //     aniStyle: true,
+  //   });
+  // },
+  // bigeye: function () {
+  //   var that = this;
+  //   var show4 = this.data.showValue4;
+  //   this.setData({
+  //     ifShow: true,
+  //     id: 4,
+  //     taps: [0, 0, 0, 4, 0],
+  //     showValue0: show4,
+  //     increase: false,
+  //     aniStyle: true,
+  //   });
+  // },
+  // lips: function () {
+  //   var that = this;
+  //   this.setData({
+  //     taps: [0, 0, 0, 0, 5],
+  //     ifShow: false,
+  //     increase: true,
+  //     aniStyle: true,
+  //   });
+  // },
+  // zhuan: function () {
+  //   var that = this;
+  //   var photo = this.data.tempbase;
+  //   var photo2 = this.data.avatarbase;
+  //   this.setData({
+  //     tap: [1, 0, 0, 0, 0],
+  //   })
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       R: 178,
+  //       G: 34,
+  //       B: 34,
+  //       A: 80,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //       });
+  //       wx.request({
+  //         url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //         data: {
+  //           R: 178,
+  //           G: 34,
+  //           B: 34,
+  //           A: 80,
+  //           avatarbase: photo2,
+  //         },
+  //         method: 'POST',
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         success(res) {
+  //           var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //           that.setData({
+  //             resultbase : res.data.ResultImage,
+  //           });
+  //         },
+  //         fail: function (err) {//请求成功的回调函数
+  //           console.log(err)
+  //         }
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
+  // xing: function () {
+  //   var that = this;
+  //   var photo = this.data.tempbase;
+  //   var photo2 = this.data.avatarbase;
+  //   this.setData({
+  //     tap: [0, 1, 0, 0, 0],
+  //   });
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       R: 220,
+  //       G: 20,
+  //       B: 60,
+  //       A: 80,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //       });
+  //       wx.request({
+  //         url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //         data: {
+  //           R: 220,
+  //           G: 20,
+  //           B: 60,
+  //           A: 80,
+  //           avatarbase: photo2,
+  //         },
+  //         method: 'POST',
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         success(res) {
+  //           var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //           that.setData({
+  //             resultbase : res.data.ResultImage,
+  //           });
+  //         },
+  //         fail: function (err) {//请求成功的回调函数
+  //           console.log(err)
+  //         }
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
+  // niu: function () {
+  //   var that = this;
+  //   var photo = this.data.tempbase;
+  //   var photo2 = this.data.avatarbase;
+  //   this.setData({
+  //     tap: [0, 0, 1, 0, 0],
+  //   });
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       R: 139,
+  //       G: 0,
+  //       B: 0,
+  //       A: 80,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //       });
+  //       wx.request({
+  //         url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //         data: {
+  //           R: 139,
+  //           G: 0,
+  //           B: 0,
+  //           A: 80,
+  //           avatarbase: photo2,
+  //         },
+  //         method: 'POST',
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         success(res) {
+  //           var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //           that.setData({
+  //             resultbase : res.data.ResultImage,
+  //           });
+  //         },
+  //         fail: function (err) {//请求成功的回调函数
+  //           console.log(err)
+  //         }
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
+  // zheng: function () {
+  //   var that = this;
+  //   var photo = this.data.tempbase;
+  //   var photo2 = this.data.avatarbase;
+  //   this.setData({
+  //     tap: [0, 0, 0, 1, 0],
+  //   });
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       R: 255,
+  //       G: 0,
+  //       B: 0,
+  //       A: 80,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //       });
+  //       wx.request({
+  //         url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //         data: {
+  //           R: 255,
+  //           G: 0,
+  //           B: 0,
+  //           A: 80,
+  //           avatarbase: photo2,
+  //         },
+  //         method: 'POST',
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         success(res) {
+  //           var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //           that.setData({
+  //             resultbase : res.data.ResultImage,
+  //           });
+  //         },
+  //         fail: function (err) {//请求成功的回调函数
+  //           console.log(err)
+  //         }
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
+  // fen: function () {
+  //   var that = this;
+  //   var photo = this.data.tempbase;
+  //   var photo2 = this.data.avatarbase;
+  //   this.setData({
+  //     tap: [0, 0, 0, 0, 1],
+  //   });
+  //   let url=app.globalData.host;
+  //   wx.request({
+  //     url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //     data: {
+  //       R: 255,
+  //       G: 105,
+  //       B: 180,
+  //       A: 80,
+  //       avatarbase: photo,
+  //     },
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     success(res) {
+  //       var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //       that.setData({
+  //         avatarUrl: ImgUrl,
+  //       });
+  //       wx.request({
+  //         url: url+'/lipstick', //仅为示例，并非真实的接口地址
+  //         data: {
+  //           R: 255,
+  //           G: 105,
+  //           B: 180,
+  //           A: 80,
+  //           avatarbase: photo2,
+  //         },
+  //         method: 'POST',
+  //         header: {
+  //           'content-type': 'application/x-www-form-urlencoded'
+  //         },
+  //         success(res) {
+  //           var ImgUrl = that.getBase64ImageUrl(res.data.ResultImage);
+  //           that.setData({
+  //             resultbase : res.data.ResultImage,
+  //           });
+  //         },
+  //         fail: function (err) {//请求成功的回调函数
+  //           console.log(err)
+  //         }
+  //       })
+  //     },
+  //     fail: function (err) {//请求成功的回调函数
+  //       console.log(err)
+  //     }
+  //   })
+  // },
   getBase64ImageUrl: function (data) {
     /// 获取到base64Data
     var base64Data = data;
@@ -433,7 +459,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   
   },
 
   /**

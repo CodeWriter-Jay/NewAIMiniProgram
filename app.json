@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/madeup/madeup",
     "pages/mainform/mainform",
     "pages/facecartoon/facecartoon",
     "pages/chatroom/chatroom",
-    "pages/ocr/ocr",
-    "pages/madeup/madeup"
+    "pages/ocr/ocr"    
   ],
   "plugins": {
     "WechatSI": {
