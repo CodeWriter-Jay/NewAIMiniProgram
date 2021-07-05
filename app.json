@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/virtualMakeup/virtualMakeup",
+    
     "pages/madeup/madeup",
     "pages/mainform/mainform",
     "pages/facecartoon/facecartoon",
     "pages/chatroom/chatroom",
-    "pages/ocr/ocr"
+    "pages/ocr/ocr",
+    "pages/virtualMakeup/virtualMakeup"
     
   ],
   "plugins": {
