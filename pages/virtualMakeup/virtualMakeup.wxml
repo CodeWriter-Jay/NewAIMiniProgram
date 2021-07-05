@@ -1,0 +1,22 @@
+
+<camera wx:if="{{isShowPic == false}}" device-position="{{position}}" flash="" binderror="error" style="width: 90%; height: {{screenHeight*0.70}}px; margin:auto" >
+
+</camera>
+<view wx:else>
+<image src="{{src}}" data-src="{{src}}" mode="aspectFit" style="width:100%;height:{{screenHeight*0.70}}px;display:block" ></image>
+</view>
+<view class="makeup">
+  <image src="{{source}}" class="source" bindtap="chooseMakeup"></image>
+  <image class="source" src="/src/makeups/source1.JPG" bindtap="chooseMakeup"></image>
+  <image class="source" src="/src/makeups/source2.JPG"></image>
+  <image class="source" src="/src/makeups/source3.JPG"></image>
+  <image class="source" src="/src/makeups/source4.JPG"></image>
+</view>
+<view class="btn_box">
+  <image class="icon" src="/src/icons/album (2).png"  bindtap="choosePhoto"></image>
+  <image class="icon1" src="/src/icons/takePhoto.PNG"  bindtap="takePhoto"></image>
+  <image class="icon" src="/src/icons/reverse (2).png"  bindtap="reverseCamera"></image>
+</view>
+
+
+
