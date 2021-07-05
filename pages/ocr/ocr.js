@@ -16,6 +16,7 @@ Page({
     //语音
     content:'', //输入
     result:'', //输出 翻译结果
+    imageTransAccess_token:'',//图片翻译acess_token
     languagefrom:[
       {
         name:'自动',
@@ -108,8 +109,8 @@ Page({
       from: languagefrom,
       to: languageto
     })
-    console.log(this.data.from);
-    console.log(this.data.to)
+    //console.log(this.data.from);
+    //console.log(this.data.to)
   },
   // 手动输入内容
   conInput: function (e) {
@@ -117,13 +118,107 @@ Page({
     content:e.detail.value,
     })
   },
+
+  //获取图片翻译access_token
+  getImageTransAcessToken:function(){
+    var _this=this
+    wx.request({
+      url: 'https://aip.baidubce.com/oauth/2.0/token',
+      data:{
+        grant_type:'client_credentials',
+        client_id:'ooP8LHYuldmOBKFjjHh0ojtW',
+        client_secret:'woMQ485394o7r8AhYrG1frEK6d4og3Uj'
+      },
+      success(res){
+        //console.log('图片翻译access_token',res)
+       _this.setData({
+          imageTransAccess_token:res.data.access_token
+        })
+      }
+    })
+  },
+
+  takePhoto() {
+    const _this = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: 'compressed',
+      sourceType: ['camera'],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        //const tempFilePaths = res.tempFilePaths;
+        let img = res.tempFilePaths[0];
+        wx.compressImage({
+          src: img,
+          quality: 20,
+          success(res) {
+            console.log(res.tempFilePath);
+            img = res.tempFilePath;
+          }
+        })
+        let url = 'https://aip.baidubce.com/file/2.0/mt/pictrans/v1?access_token='+_this.data.imageTransAccess_token;
+        _this.getImageTransResult(url,img,Text(_this.data.from),Text(_this.data.to))
+      },
+      fail(error) {
+        console.log(error)
+      }
+    })
+  },
+  imagefromAlbum() {
+    const _this = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: 'compressed',
+      sourceType: ['album'],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        //const tempFilePaths = res.tempFilePaths;
+        // console.log(wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64"))
+        //let imagePath = wx.getFileSystemManager().readFileSync(res.tempFilePaths[0], "base64");
+        // let url = app.globalData.host;
+        let imagePath=res.tempFilePaths[0]
+        console.log(imagePath)
+        let url = 'https://aip.baidubce.com/file/2.0/mt/pictrans/v1?access_token='+_this.data.imageTransAccess_token;
+        _this.getImageTransResult(url,imagePath,_this.data.from,_this.data.to)
+      }
+    })
+  },
+
+  getImageTransResult(url,imagePath,from,to){
+    var _this=this
+    wx.uploadFile({
+      filePath: imagePath,
+      name: 'image',
+      url: url,
+      formData:{
+        from:from,
+        to:to
+      },
+      Header: {
+        'Content-Type	': 'mutipart/form-data' // 改变默认值为这个配置
+      },
+      method: "POST",
+      success(res) {
+        console.log(res)
+        _this.setData({
+          result: (JSON.parse(res.data)).data.sumDst
+        })
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    }) 
+   },
   translate:function(){
     var _this = this;
     //let content = this.data.content;
     let from = this.data.from;
     let to = this.data.to;
 
-    var q = this.data.content;    
+    var q = this.data.content; 
+    if(q==''){
+      return 0
+    }   
     //var from = 'en'
     //var to = 'zh'
     //注册获得appid和密匙
@@ -144,8 +239,8 @@ Page({
         sign
       },
       success: res => {
-        console.log('success:', res)
-        console.log('result',res.data.trans_result[0].dst)
+        //console.log('success:', res)
+        //console.log('result',res.data.trans_result[0].dst)
         this.setData({
           result:res.data.trans_result[0].dst
         })        
@@ -216,6 +311,7 @@ Page({
   onLoad: function (options) {
     //识别语音
     this.initRecord();
+    this.getImageTransAcessToken()
   },
 
   /**
