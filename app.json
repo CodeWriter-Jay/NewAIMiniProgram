@@ -1,13 +1,11 @@
 {
   "pages": [
-    
+    "pages/virtualMakeup/virtualMakeup",
     "pages/madeup/madeup",
     "pages/mainform/mainform",
     "pages/facecartoon/facecartoon",
     "pages/chatroom/chatroom",
-    "pages/ocr/ocr",
-    "pages/virtualMakeup/virtualMakeup"
-    
+    "pages/ocr/ocr"
   ],
   "plugins": {
     "WechatSI": {
@@ -33,7 +31,6 @@
         "selectedIconPath": "/src/icons/mainform-active.png"
       },
       {
-        
         "pagePath": "pages/facecartoon/facecartoon",
         "text": "人脸动漫化",
         "iconPath": "/src/icons/android-default.png",
@@ -47,6 +44,12 @@
       },
       {
         "pagePath": "pages/madeup/madeup",
+        "text": "人像扣图",
+        "iconPath": "/src/icons/face-default.png",
+        "selectedIconPath": "/src/icons/face-active.png"
+      },
+      {
+        "pagePath": "pages/virtualMakeup/virtualMakeup",
         "text": "人脸试妆",
         "iconPath": "/src/icons/face-default.png",
         "selectedIconPath": "/src/icons/face-active.png"
