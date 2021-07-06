@@ -1,0 +1,44 @@
+<!-- <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera> -->
+<view class="top">
+	<view class="language" bindtap="openSelector">{{start}}</view>
+	<view class="language" bindtap="openSelector">{{end}}</view>
+	<view wx:if="{{isShow}}"> 
+		<view >{{from}} {{to}}</view>
+	</view>
+</view>
+	 
+<view class="changelanguage" style="display:{{langPickerDisplay}}">
+	<view class="lang-btnbox">
+		<button class="lang-btn" type="primary" size="mini" bindtap="closeSelector">确定</button>
+	</view>
+	<!-- <view class="line1"></view> -->
+	<picker-view class="pickerView" indicator-style="height: 50px;" style="width: 100%; height: 300px;" bindchange="bindChange">
+		<picker-view-column>
+			<view wx:for="{{languagefrom}}" style="line-height: 50px; text-align: center;" value="{{languagefrom[index].name}}" range="{{languagefrom}}" range-key="{{'name'}}">{{languagefrom[index].name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{languageto}}" style="line-height: 50px; text-align: center;" value="{{languageto[index].name}}" range="{{languageto}}" range-key="{{'name'}}">{{languageto[index].name}}</view>
+		</picker-view-column>
+	</picker-view>
+</view>
+
+<input class='yuyinCon' placeholder="查单词或翻译句子" value="{{content}}" bindinput="conInput"></input>
+<view class="tools">
+	<image class="tool" src="../../src/image/camera01.png" bindtap="takePhoto"></image>
+	<image class="tool" src="../../src/image/alb01.png" bindtap="imagefromAlbum"></image>
+	<image class="tool {{recordState == true ? 'yuyinBtnBg':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd" src="../../src/image/mic01.png"></image>
+	<!-- 开始语音 弹出语音图标表示正在录音 -->
+      <cover-view class="startYuyinImage" wx:if="{{recordState == true}}">
+        <cover-image src="../../src/image/talking.png"></cover-image>
+        <cover-view>开始语音</cover-view>
+      </cover-view>
+	<button class="transbtn"  bindtap="translate" type="default" plain="true">翻译</button>
+</view>
+
+<image class="preview" mode="aspectFit" src="{{src}}"></image>
+
+<view class="result">
+    <view>翻译结果</view>
+		<view class="line"></view>
+    <view class="output">{{result}}</view>
+</view>

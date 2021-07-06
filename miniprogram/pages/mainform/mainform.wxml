@@ -1,0 +1,27 @@
+<!--pages/mainform/mainform.wxml-->
+<view class="page__hd">
+	<view class="page__title">一、程序介绍</view>
+	<view class="page__desc">
+		程序名称：AI微信小程序
+	</view>
+</view>
+
+<view class="page__hd">
+  <view class="page__title">二、功能介绍</view>
+	<view class="page__desc">
+		“外语交流助手”功能、“人脸试妆”功能、“人脸动漫化”功能。
+	</view>
+</view>
+
+<view class="page__hd">
+  <view class="page__title">三、成员分工介绍</view>
+	<view class="page__desc">
+		朱海燕、张艳：“外语交流助手”功能；
+	</view>
+  <view class="page__desc">
+		张佳酝、尹鹏玉：“人脸试妆”功能；
+	</view>
+  <view class="page__desc">
+		张杰、周诗雨：“人脸动漫化”功能；
+	</view>
+</view>

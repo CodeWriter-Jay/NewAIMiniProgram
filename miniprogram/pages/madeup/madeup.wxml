@@ -1,0 +1,101 @@
+<view class="outer">
+<!-- 导航条 -->
+  <view class="input-file" type="button" bindtap="chooseImg">
+    <image src="{{avatarUrl}}" data-src="{{avatarUrl}}" mode="aspectFit"></image>
+    <input type="file"  id="file" name="files[]" multiple  />
+  </view>
+</view>
+<view bindtap="section"><image src="/src/image/photogirl.png"></image></view>
+<!-- 口红颜色
+<view  class='increased {{aniStyle?"slideup":"slidedown"}}' wx:if="{{increase}}">
+    <view class="zhs" bindtap="zhuan">
+      <image src="/src/images/zhuanhong.png"></image>
+      <view>
+      <view wx:if="{{tap[0]==1}}" style="color:#b22222">砖红色</view>
+      <view wx:else>砖红色</view>
+      </view>
+    </view>
+    <view class="xhs" bindtap="xing">
+      <image src="/src/images/xinghong.png"></image>
+      <view>
+      <view  wx:if="{{tap[1]==1}}" style="color:#dc143c">猩红色</view>
+      <view wx:else>猩红色</view>
+      </view>
+    </view>
+    <view class="nxs" bindtap="niu">
+      <image src="/src/images/niuxie.png"></image>
+      <view>
+      <view wx:if="{{tap[2]==1}}" style="color:#8b0000">牛血色</view>
+      <view wx:else>牛血色</view>
+      </view>
+    </view>
+    <view class="zhenghs" bindtap="zheng">
+      <image src="/src/images/zhenghong.png"></image>
+      <view>
+      <view wx:if="{{tap[3]==1}}" style="color:#ff0000">正红色</view>
+      <view wx:else>正红色</view>
+      </view>
+    </view>
+    <view class="pink" bindtap="fen">
+      <image src="/src/images/pink.png"></image>
+      <view>
+      <view wx:if="{{tap[4]==1}}" style="color:#ff69b4">少女粉</view>
+      <view wx:else>少女粉</view>
+      </view>
+    </view>
+  </view> -->
+<!-- 拉动选择大小 -->
+<!-- <slider wx:if="{{ifShow}}" bindchange="sliderchange" min="{{minValue}}" max="{{maxValue}}"  value="{{showValue0}}" selected-color="#707070" show-value/> -->
+<!-- 选择美颜部分 -->
+<!-- <view class="form">  
+<view class="lowform1" bindtap="smooth">
+  <view wx:if="{{taps[0]==1}}">
+    <image src="/src/images/grindskin1.png"></image>
+    <view style="color:#1296db">磨皮</view>
+  </view>
+  <view wx:else>
+    <image src="/src/images/grindskin.png"></image>
+    <view>磨皮</view>
+  </view>
+</view>
+<view class="lowform2" bindtap="white">
+  <view wx:if="{{taps[1]==2}}">
+    <image src="/src/images/whitening1.png"></image>
+    <view style="color:#1296db">美白</view>
+  </view>
+  <view wx:else>
+    <image src="/src/images/whitening.png"></image>
+    <view>美白</view>
+  </view>
+</view>
+<view class="lowform2"  bindtap="thinface">
+  <view wx:if="{{taps[2]==3}}">
+    <image src="/src/images/thinface1.png"></image>
+    <view style="color:#1296db">瘦脸</view>
+  </view>
+  <view wx:else>
+    <image src="/src/images/thinface.png"></image>
+    <view>瘦脸</view>
+  </view>
+</view>
+<view class="lowform2"  bindtap="bigeye">
+  <view wx:if="{{taps[3]==4}}">
+    <image src="/src/images/bigeye1.png"></image>
+    <view style="color:#1296db">大眼</view>
+  </view>
+  <view wx:else>
+    <image src="/src/images/bigeye.png"></image>
+    <view>大眼</view>
+  </view>
+</view>
+<view class="lowform2" bindtap="lips">
+  <view wx:if="{{taps[4]==5}}">
+    <image src="/src/images/lipstick1.png"></image>
+    <view style="color:#1296db">口红</view>
+  </view>
+  <view wx:else>
+    <image src="/src/images/lipstick.png"></image>
+    <view>口红</view>
+  </view>
+</view>
+</view> -->
